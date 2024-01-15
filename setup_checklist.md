@@ -12,4 +12,4 @@ Checklist for the express project initial setup
 - [x] Logger Setup
 - [x] Error handling setup
 - [x] Tests setup
-- [ ] Create Template
+- [x] Create Template
