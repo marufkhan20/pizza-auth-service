@@ -1,0 +1,10 @@
+1. Home page - Where show all answers questions
+2. Quiz page where show all active Quiz
+3. Single quiz page where user participate in quiz
+4. User Login register page. Where user create a account and login.
+5. admin dashboard where admin can manage all information
+6. add question and answer
+7. delete and edit already added question and answer.
+8. add quiz
+9. edit and delete quiz.
+10 See all added quiz and filter - same for all questions;
