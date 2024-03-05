@@ -7,6 +7,9 @@ import authRouter from "./routes/auth";
 
 const app = express();
 
+// static folder
+app.use(express.static("public"));
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -21,7 +24,7 @@ app.use("/auth", authRouter);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
   logger.error(err.message);
-  const statuscode = err.statusCode || 500;
+  const statuscode = err.statusCode || err.status || 500;
 
   res.status(statuscode).json({
     errors: [
