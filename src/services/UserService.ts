@@ -8,6 +8,7 @@ import { UserData } from "../types";
 export class UserService {
   constructor(private userRepository: Repository<User>) {}
 
+  // create a new user
   async create({ firstName, lastName, email, password }: UserData) {
     // check user
     const user = await this.userRepository.findOne({ where: { email } });
@@ -34,5 +35,12 @@ export class UserService {
       );
       throw error;
     }
+  }
+
+  // find user by email
+  async findByEmail(email: string) {
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    return user;
   }
 }
