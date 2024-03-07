@@ -13,7 +13,9 @@
     "prepare": "husky install",
     "test": "jest --watch --runInBand",
     "start": "ts-node src/index.ts",
-    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:generate": "typeorm-ts-node-commonjs migration:generate",
+    "migration:run": "typeorm-ts-node-commonjs migration:run",
+    "migration:create": "typeorm-ts-node-commonjs migration:create",
     "database": "docker run --rm --name mernpg-container -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -v mernpgdata:/var/lib/postgresql/data -p 5432:5432 -it postgres"
   },
   "keywords": [],
