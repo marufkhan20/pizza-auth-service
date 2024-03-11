@@ -8,7 +8,14 @@ export class UserService {
   constructor(private userRepository: Repository<User>) {}
 
   // create a new user
-  async create({ firstName, lastName, email, password, role }: UserData) {
+  async create({
+    firstName,
+    lastName,
+    email,
+    password,
+    role,
+    tenantId,
+  }: UserData) {
     // check user
     const user = await this.userRepository.findOne({ where: { email } });
     if (user) {
@@ -26,6 +33,7 @@ export class UserService {
         email,
         password: hashedPassword,
         role,
+        tenant: tenantId ? { id: tenantId } : undefined,
       });
     } catch (err) {
       const error = createHttpError(
@@ -41,6 +49,15 @@ export class UserService {
     const user = await this.userRepository.findOne({ where: { email } });
 
     return user;
+  }
+
+  async findByEmailWithPassword(email: string) {
+    return await this.userRepository.findOne({
+      where: {
+        email,
+      },
+      select: ["id", "firstName", "lastName", "email", "role", "password"],
+    });
   }
 
   // find user by id

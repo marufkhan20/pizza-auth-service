@@ -4,7 +4,9 @@ import { DataSource } from "typeorm";
 import app from "../../src/app";
 import { AppDataSource } from "../../src/config/data-source";
 import { Roles } from "../../src/constants";
+import { Tenant } from "../../src/entity/Tenant";
 import { User } from "../../src/entity/User";
+import { createTenant } from "../utils";
 
 describe("POST /users", () => {
   let connection: DataSource;
@@ -37,13 +39,17 @@ describe("POST /users", () => {
 
   describe("Given all fields", () => {
     it("should persist the user in the database", async () => {
+      // Create tenant first
+      const tenant = await createTenant(connection.getRepository(Tenant));
+
       // Arrange
       const userData = {
         firstName: "Rakesh",
         lastName: "K",
         email: "rakesh@mern.space2",
         password: "password",
-        tenantId: 1,
+        role: Roles.MANAGER,
+        tenantId: tenant.id,
       };
 
       // Act
@@ -62,13 +68,17 @@ describe("POST /users", () => {
     });
 
     it("should create a manager user", async () => {
+      // Create tenant first
+      const tenant = await createTenant(connection.getRepository(Tenant));
+
       // Arrange
       const userData = {
         firstName: "Rakesh",
         lastName: "K",
         email: "rakesh@mern.space2",
         password: "password",
-        tenantId: 1,
+        role: Roles.MANAGER,
+        tenantId: tenant.id,
       };
 
       // Act
