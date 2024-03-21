@@ -27,7 +27,7 @@ jobs:
           DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
           DB_NAME: ${{ secrets.TEST_DB_NAME }}
           REFRESH_TOKEN_SECRET: ${{ secrets.REFRESH_TOKEN_SECRET }}
-          JWSK: ${{ secrets.JWSK_URI }}
+          JWKS_URI: ${{ secrets.JWSK_URI }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       - name: Build-ts
         run: npm run build
