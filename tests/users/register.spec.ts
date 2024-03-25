@@ -175,8 +175,8 @@ describe("POST /auth/register", () => {
       }
 
       // Assert
-      let accessToken = null;
-      let refreshToken = null;
+      let accessToken: string | null = null;
+      let refreshToken: string | null = null;
       const cookies =
         (response.headers as unknown as Headers)["set-cookie"] || [];
 
@@ -215,8 +215,8 @@ describe("POST /auth/register", () => {
       }
 
       // Assert
-      let accessToken = null;
-      let refreshToken = null;
+      let accessToken: string | null = null;
+      let refreshToken: string | null = null;
       const cookies =
         (response.headers as unknown as Headers)["set-cookie"] || [];
 
