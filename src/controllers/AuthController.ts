@@ -26,12 +26,13 @@ export class AuthController {
     }
 
     // extract body data
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
 
     this.logger.debug("New request to register a user", {
       firstName,
       lastName,
       email,
+      role,
       password: password ? "*****" : "undefined",
     });
 
@@ -41,7 +42,7 @@ export class AuthController {
         lastName,
         email,
         password,
-        role: Roles.CUSTOMER,
+        role: role || Roles.CUSTOMER,
       });
 
       this.logger.info("User has been registered", { id: user.id });
