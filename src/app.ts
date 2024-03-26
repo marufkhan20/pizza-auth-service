@@ -1,7 +1,9 @@
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import { HttpError } from "http-errors";
 import "reflect-metadata";
+import { Config } from "./config";
 import logger from "./config/logger";
 import authRouter from "./routes/auth";
 import tenantRouter from "./routes/tenant";
@@ -11,6 +13,14 @@ const app = express();
 
 // static folder
 app.use(express.static("public"));
+
+// cors
+app.use(
+  cors({
+    origin: [Config.CLIENT_URL || ""],
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 app.use(cookieParser());
