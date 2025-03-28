@@ -29,7 +29,8 @@
     "@types/dotenv": "^8.2.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "typescript-eslint": "^8.28.0"
+    "typescript-eslint": "^8.28.0",
+    "winston": "^3.17.0"
   },
   "lint-staged": {
     "*.ts": [
