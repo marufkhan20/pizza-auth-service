@@ -59,6 +59,31 @@ describe("POST /auth/register", () => {
         (response.headers as Record<string, string>)["content-type"],
       ).toEqual(expect.stringContaining("json"));
     });
+
+    it("should persist the user in the database", async () => {
+      // Arrange
+      const userData = {
+        firstName: "Md",
+        lastName: "Maruf",
+        email: "maruf@gmail.com",
+        password: "marufkhan",
+      };
+
+      // Act
+      await request(app as unknown as App)
+        .post("/auth/register")
+        .send(userData);
+
+      // Assert
+      const userRepository = connection.getRepository("User");
+      const users = await userRepository.find();
+
+      expect(users).toHaveLength(1);
+      expect(users[0].firstName).toBe(userData.firstName);
+      expect(users[0].lastName).toBe(userData.lastName);
+      expect(users[0].email).toBe(userData.email);
+      expect(users[0].password).toBe(userData.password);
+    });
   });
 
   describe("Fields are missing", () => {});
