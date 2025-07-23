@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev nodemon src/server.ts",
+    "build": "tsc",
+    "docker:run": "docker run --rm -it -v $(pwd -W):/usr/src/app -v /usr/src/app/node_modules --env-file $(pwd -W)/.env.dev -p 5501:5501 -e NODE_ENV=dev auth-service:dev",
     "format:fix": "prettier . --write",
     "format:check": "prettier . --check",
     "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "jest --watch --runInBand",
+    "test": "jest --no-cache --coverage --all --runInBand",
+    "test:watch": "jest --watch --runInBand",
     "prepare": "husky",
     "start": "ts-node src/index.ts",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "database": "docker run --name mernpizza-postgres -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -v pizzapgdata:/var/lib/postgresql/data -p 5432:5432 -i postgres"
   },
   "author": "Maruf",
   "license": "ISC",
@@ -31,8 +35,8 @@
     "lint-staged": "^15.5.0",
     "nodemon": "^3.1.9",
     "prettier": "3.5.3",
-    "supertest": "^7.1.0",
-    "ts-jest": "^29.3.0",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
     "typescript": "4.5.2"
   },
